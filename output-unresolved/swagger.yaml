@@ -1,0 +1,131 @@
+swagger: '2.0'
+info:
+  description: This is a simple Banking API V3.1
+  version: 3.0.0
+  title: Simple Banking API V3
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: developers
+    description: Operations available to regular developers
+paths:
+  /accounts:
+    get:
+      tags:
+        - developers
+      summary: searches accounts
+      operationId: searchaccounts
+      description: |
+        By passing in the appropriate options, you can search for
+        available accounts in the system
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: searchString
+          description: pass an optional search string for looking up accounts
+          required: false
+          type: string
+        - in: query
+          name: newSe
+          description: pass an optional search string for looking up accounts
+          required: false
+          type: string          
+        - in: query
+          name: skip
+          description: number of records to skip for pagination
+          type: integer
+          format: int32
+          minimum: 0
+        - in: query
+          name: limit
+          description: maximum number of records to return
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 50
+      responses:
+        '200':
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AccountsItem'
+        '400':
+          description: bad input parameter
+    post:
+      tags:
+        - admins
+      summary: adds an accounts item
+      operationId: addaccounts
+      description: Adds an item to the system
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: accountsItem
+          description: accounts item to add
+          schema:
+            $ref: '#/definitions/AccountsItem'
+      responses:
+        '201':
+          description: item created
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AccountsItem'
+        '400':
+          description: 'invalid input, object invalid'
+          schema:
+            type: array
+            items:
+              $ref: 'https://api.swaggerhub.com/domains/MConneely/TestPath/1.0.0#/definitions/ErrorModel'
+        '409':
+          description: an existing item already exists
+definitions:
+  AccountsItem:
+    type: object
+    required:
+      - id
+      - name
+      - accountType
+      - createdDate
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: Joe Bloggs
+      createdDate:
+        type: string
+        format: date-time
+        example: '2016-08-29T09:12:33.001Z'
+      accountType:
+        $ref: '#/definitions/AccountType'
+  AccountType:
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        example: Personal
+      homePage:
+        type: string
+        format: url
+        example: 'https://www.personal-banking.com'
+      phone:
+        type: string
+        example: 408-867-5309
+host: virtserver.swaggerhub.com
+basePath: /MConneely/Banking-API/3.0.0
+schemes:
+  - https
