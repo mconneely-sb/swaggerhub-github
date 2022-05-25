@@ -1,9 +1,9 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "description" : "This is a simple Banking API V2.1.0",
-    "version" : "2.0.0",
-    "title" : "Simple Banking API V2",
+    "description" : "This is a simple Banking API V3.1.6",
+    "version" : "3.0.0",
+    "title" : "Simple Banking API V3",
     "contact" : {
       "email" : "you@your-company.com"
     },
@@ -13,7 +13,7 @@
     }
   },
   "host" : "virtserver.swaggerhub.com",
-  "basePath" : "/MConneely/Banking-API/2.0.0",
+  "basePath" : "/MConneely/Banking-API/3.0.0",
   "tags" : [ {
     "name" : "admins",
     "description" : "Secured Admin-only calls"
