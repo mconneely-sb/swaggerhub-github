@@ -1,9 +1,9 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "description" : "This is a simple Banking API V2.1.1",
+    "description" : "This is a simple Banking API V2.1",
     "version" : "2.0.0",
-    "title" : "Simple Banking API V2",
+    "title" : "Simple Banking API V2.34",
     "contact" : {
       "email" : "you@your-company.com"
     },
